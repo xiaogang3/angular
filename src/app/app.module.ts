@@ -10,7 +10,7 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
+
 import { MainComponent } from './main/main.component';
 
 
@@ -20,7 +20,6 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     MainComponent
   ],
   imports: [
