@@ -1,0 +1,79 @@
+
+<div style="width: 100%;height: 100%;display: flex;flex-direction: column;overflow: hidden;position: relative;">
+    <div style="width: 100%;height: 5%;">
+        <nz-date-picker
+            nzShowTime
+            [(ngModel)]="startDate"
+            nzPlaceHolder="开始时间"
+        ></nz-date-picker>
+        <nz-date-picker
+            nzShowTime
+            [(ngModel)]="endDate"
+            nzPlaceHolder="结束时间"
+        ></nz-date-picker>
+
+        <button nz-button nzType="primary" style="margin-left: 4px;"  (click)="Query()"><span nz-icon nzType="search" nzTheme="outline"></span>查询</button>
+        <button nz-button nzType="primary" style="margin-left: 4px;" (click)="OpenInput()"><span nz-icon nzType="plus" nzTheme="outline"></span>入库</button>
+        <button nz-button nzType="primary" style="margin-left: 4px;" (click)="DownLoad()"><span nz-icon nzType="download" nzTheme="outline"></span>下载到本地</button>
+    </div>
+    <div style="width: 100%;height: 40%;border: 1px solid #ccc;">
+        <div #chartInput echarts style="width:100%;height: 100%;"></div>
+    </div>
+    <div  class="ag-theme-balham" style="width: 100%;height: 55%;">
+        <ag-grid-angular
+            [theme]="theme"
+            style="width: 100%;height: 100%;"
+            [rowData]="rowData"
+            [columnDefs]="colDefs" 
+            [autoSizeStrategy]="autoSizeStrategy"
+            [suppressAutoSize] = "true"
+            (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+    </div>
+
+    <div [@slideInOut] = "IsOpen ? 'in':'out'" class="sliding">
+        <form nz-form [formGroup]="FormData" style="width: 100%;">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzRequired>入库日期</nz-form-label>
+                <nz-form-control  [nzSpan]="18" nzHasFeedback>
+                    <nz-date-picker formControlName="DATE" nzFormat="yyyy-MM-dd HH:mm:ss" nzShowTime style="width: 60%;"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzRequired> 种类</nz-form-label>
+                <nz-form-control  [nzSpan]="18" nzHasFeedback>
+                    <nz-select formControlName="PRODUCT" nzPlaceHolder="选择产品种类" style="width: 60%;">
+                        <nz-option *ngFor="let value of product_list" [nzValue]="value" [nzLabel]="value"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzRequired>名称</nz-form-label>
+                <nz-form-control  [nzSpan]="18" nzHasFeedback>
+                    <nz-select formControlName="NAME" nzPlaceHolder="选择名称" style="width: 60%;">
+                        <nz-option *ngFor="let value of name_list" [nzValue]="value" [nzLabel]="value"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzRequired>数量</nz-form-label>
+                <nz-form-control  [nzSpan]="18" nzHasFeedback>
+                    <input nz-input type="number" formControlName="NUM" placeholder="输入数量" style="width: 60%;">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzRequired>入库说明</nz-form-label>
+                <nz-form-control  [nzSpan]="18" nzHasFeedback>
+                    <textarea nz-input type="text" rows="5" formControlName="COMMENTS" placeholder="填写入库说明" style="width: 60%;"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <div style="display: flex;justify-content: flex-end;">
+                <button nz-button nzType="primary" style="margin-right: 20px;" (click)="cancel()">取消</button>
+                <button nz-button nzType="primary" [disabled]="(!FormData.valid)" type="submit" (click)="submitForm()"  [nzLoading]="isLoading">提交</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+

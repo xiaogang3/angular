@@ -1,0 +1,13 @@
+.sliding{
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #cccc;
+    width: 40%;
+    bottom: 0;
+    right: 0;
+    height: 95%;
+    transform: translateX(100%);
+    background-color: white;
+    padding: 20px;
+    border-left: 2px solid  rebeccapurple;
+}

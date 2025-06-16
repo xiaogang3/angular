@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+.draggable-item {
+    padding: 15px;
+    width: 50%;
+    background-color: #773333;
+    color: white;
+    box-shadow: 0 2px 8px black;
+    cursor: move;
+    transition: all 0.3s ease;
+}
+.draggable-item.dragging {
+    opacity: 0.5;
+    background-color: #ccc;
+}
